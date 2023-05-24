@@ -32,12 +32,28 @@ app.delete("/users/:userID", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
-	const user = { ...req.body, id: Math.floor(Math.random * 100)+1 };
+	const user = { ...req.body, id: Math.floor(Math.random * 100) + 1 };
 	users.push(user);
 	res.send({ data: user, message: "success created user" });
 });
 
-app.put("/users/:userID", (req, res) => {});
+app.put("/users/:userID", (req, res) => {
+	const { userID } = req.params;
+	const { name, age, email } = req.body;
+  
+	const user = users.find((u) => u.id === +userID);
+  
+	if (!user) {
+	  return res.status(404).send({ message: "User not found" });
+	}
+  
+	user.name = name || user.name;
+	user.age = age || user.age;
+	user.email = email || user.email;
+  
+	res.send({ data: user, message: "User successfully updated" });
+  });
+  
 
 const PORT = 8080;
 
