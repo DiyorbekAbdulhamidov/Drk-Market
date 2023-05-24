@@ -32,7 +32,7 @@ app.delete("/users/:userID", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
-	const user = { ...req.body, id: Math.random() };
+	const user = { ...req.body, id: Math.floor(Math.random * 100)+1 };
 	users.push(user);
 	res.send({ data: user, message: "success created user" });
 });
