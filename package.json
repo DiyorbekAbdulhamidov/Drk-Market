@@ -1,0 +1,20 @@
+{
+  "name": "ok",
+  "version": "1.0.0",
+  "description": "Olcha App",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Diyorbek Abdulhamidov",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "jquery": "^3.7.0",
+    "yarn": "^1.22.19"
+  }
+}
