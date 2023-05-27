@@ -1,13 +1,31 @@
 const http = require('http');
 
-const server = http.createServer((request, response) => {
-  // request bu serverga so`rov;
-  // response bu server javobi;
+const fs = require('fs');
+const path = require('path');
 
-  console.log(request.url);
+const server = http.createServer((req, res) => {
+  if(req.method === 'GET'){
+    res.writeHead(200, { 'Content-Type': 'text/html' });
 
-  response.write("Hello World!");
-  response.end();
+    if(req.url === '/'){
+      fs.readFile(path.join(__dirname,"templates", "index.html"),"utf-8", (err, conten) => {
+        if(err) throw err;
+        res.end(conten)
+      });
+    };
+  }
+
+  else if(req.method === 'POST'){
+    const body = [];
+    req.on('data', (data) => {
+      body.push(Buffer.from(data));
+    });
+
+    req.on('end', () => {
+      const message = body.toString().split("=")[1];
+      res.end(`EMAIL succesfully sended: ${message}`);   
+    });
+  }
 });
 
 server.listen(3000, () => {
