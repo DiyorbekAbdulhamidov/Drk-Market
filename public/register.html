@@ -5,29 +5,59 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/public/style.css" type="text/css">
 </head>
 <body>
-  </div>
-  <form class="reg">
+  <form class="reg" id="form">
     <h3>Register</h3>
 
     <label for="fullname">Fullname</label>
-    <input type="text" placeholder="Fullname" id="fullname">
+    <input type="text" placeholder="Fullname" id="fullname" class="regFullName" name="fullname">
 
     <label for="username">Email</label>
-    <input type="text" placeholder="Email" id="username">
+    <input type="text" placeholder="Email" id="username" class="regUserName" name="username">
 
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password">
+    <input type="password" placeholder="Password" id="password" class="regPassword" name="password">
 
-    <label for="password">Confirm Password</label>
-    <input type="password" placeholder="Confirm Password" id="confirm-password">
+    <label for="confirm-password">Confirm Password</label>
+    <input type="password" placeholder="Confirm Password" id="confirm-password" class="regConfirmPassword" name="confirmPassword">
 
-    <button>Log In</button>
+    <button type="submit">Register</button>
     <div class="social">
-      <p> Do you have an account? <a href="login.html">Login here</a></p>
+      <p>Do you have an account? <a href="/public/login.html">Login here</a></p>
     </div>
   </form>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const form = document.querySelector('#form');
+    const regFullName = document.querySelector('#fullname');
+    const regUserName = document.querySelector('#username');
+    const regPassword = document.querySelector('#password');
+    const regConfirmPassword = document.querySelector('#confirm-password');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const fullname = regFullName.value;
+      const username = regUserName.value;
+      const password = regPassword.value;
+      const confirmPassword = regConfirmPassword.value;
+
+      try {
+        const response = await axios.post('/register', {
+          fullname,
+          username,
+          password,
+          confirmPassword
+        });
+
+        console.log(response.data);
+        // Boshqa amallarni bajaring
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  </script>
 </body>
 </html>
