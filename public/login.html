@@ -8,21 +8,55 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div>
+    <form>
+      <h3>Login</h3>
+
+      <label for="username">Email</label>
+      <input type="text" placeholder="Email" id="username">
+
+      <label for="password">Password</label>
+      <input type="password" placeholder="Password" id="password">
+
+      <button>Log In</button>
+      <div class="social">
+        <p>Don't have an account? <a href="register.html">Register here</a></p>
+      </div>
+    </form>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form');
+        const usernameInput = document.querySelector('#username');
+        const passwordInput = document.querySelector('#password');
+
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          const username = usernameInput.value;
+          const password = passwordInput.value;
+
+          try {
+            const response = await fetch('/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ username, password })
+            });
+
+            if (response.status === 200) {
+              const message = await response.json();
+              console.log(message);
+              // Boshqa amallarni bajaring
+            } else {
+              throw new Error('Server bilan muammo yuz berdi');
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        });
+      });
+    </script>
   </div>
-  <form>
-    <h3>Login</h3>
-
-    <label for="username">Email</label>
-    <input type="text" placeholder="Email" id="username">
-
-    <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password">
-
-    <button>Log In</button>
-    <div class="social">
-      <p>Don't have an account? <a href="register.html">Register here</a></p>
-    </div>
-  </form>
-  <script src="/src/main.js"></script>
 </body>
 </html>
