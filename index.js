@@ -13,13 +13,13 @@ mongoose.connect('mongodb://127.0.0.1:27017/mydatabase', {
   useUnifiedTopology: true
 })
   .then(() => {
-    console.log('Ulanildi ura!');
+    console.log('Ulandi ura!');
     app.listen(3000, () => {
-      console.log('Server ishlashga tayyor');
+      console.log('Server ishlayapti');
     });
   })
   .catch((error) => {
-    console.error('Ulanmadi ❌  ', error);
+    console.error('Xatolik serverda ❌:', error);
   });
 
 const Schema = mongoose.Schema;
@@ -29,7 +29,7 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  username: {
+  email: {
     type: String,
     required: true,
     unique: true
@@ -49,24 +49,41 @@ const User = mongoose.model('User', userSchema);
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'register.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.post('/register', (req, res) => {
-  const { fullname, username, password, confirmPassword } = req.body;
+  const { fullname, email, password, confirmPassword } = req.body;
 
   const user = new User({
     fullname,
-    username,
+    email,
     confirmPassword,
     password
   });
 
   user.save()
     .then(() => {
-      res.status(200).send('Foydalanuvchi muvaffaqiyatli ro\'yxatdan o\'tdi');
+      res.status(200).send('Ro`yxatdan o`tidingiz, Tabriklamiz!');
     })
     .catch((error) => {
-      res.status(400).send('Foydalanuvchi saqlanmadi: ' + error.message);
+      res.status(400).send('Ro`yxatdan o`tishda xatolikz❌ ' + error.message);
+    });
+});
+
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  User.findOne({ email, password })
+    .then((user) => {
+      if (user) {
+        res.status(200).send('Kirish bajarildi!');
+      } 
+      else {
+        res.status(400).send('Email yoki parol xato,yoki umuman bu user yo`q');
+      }
+    })
+    .catch((error) => {
+      res.status(400).send('Error: ' + error.message);
     });
 });

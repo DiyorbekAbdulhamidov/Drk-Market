@@ -9,11 +9,10 @@
 </head>
 <body>
   <div>
-    <form>
+    <form id="form">
       <h3>Login</h3>
-
       <label for="username">Email</label>
-      <input type="text" placeholder="Email" id="username">
+      <input type="text" placeholder="Email" id="email">
 
       <label for="password">Password</label>
       <input type="password" placeholder="Password" id="password">
@@ -23,40 +22,10 @@
         <p>Don't have an account? <a href="register.html">Register here</a></p>
       </div>
     </form>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const form = document.querySelector('form');
-        const usernameInput = document.querySelector('#username');
-        const passwordInput = document.querySelector('#password');
-
-        form.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          const username = usernameInput.value;
-          const password = passwordInput.value;
-
-          try {
-            const response = await fetch('/login', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ username, password })
-            });
-
-            if (response.status === 200) {
-              const message = await response.json();
-              console.log(message);
-              // Boshqa amallarni bajaring
-            } else {
-              throw new Error('Server bilan muammo yuz berdi');
-            }
-          } catch (error) {
-            console.error(error);
-          }
-        });
-      });
-    </script>
   </div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="/public/js/log.js"></script>
+
 </body>
 </html>

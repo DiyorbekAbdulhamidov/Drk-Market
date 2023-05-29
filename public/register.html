@@ -8,28 +8,29 @@
   <link rel="stylesheet" href="/public/style.css" type="text/css">
 </head>
 <body>
-  <form class="reg" id="form">
+  <form class="reg" id="form" method="post" action="/register">
     <h3>Register</h3>
 
     <label for="fullname">Fullname</label>
-    <input type="text" placeholder="Fullname" id="fullname" class="regFullName" name="fullname">
+    <input type="text" placeholder="Fullname" id="fullname">
 
     <label for="username">Email</label>
-    <input type="text" placeholder="Email" id="username" class="regUserName" name="username">
+    <input type="text" placeholder="Email" id="email">
 
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password" class="regPassword" name="password">
+    <input type="password" placeholder="Password" id="password">
 
     <label for="confirm-password">Confirm Password</label>
-    <input type="password" placeholder="Confirm Password" id="confirm-password" class="regConfirmPassword"
-      name="confirmPassword">
+    <input type="password" placeholder="Confirm Password" id="confirm-password">
 
     <button type="submit">Register</button>
     <div class="social">
       <p>Do you have an account? <a href="/public/login.html">Login here</a></p>
     </div>
   </form>
+
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript" src="/public/js/reg.js"></script>
+  
 </body>
 </html>
