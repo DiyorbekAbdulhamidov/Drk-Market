@@ -21,43 +21,15 @@
     <input type="password" placeholder="Password" id="password" class="regPassword" name="password">
 
     <label for="confirm-password">Confirm Password</label>
-    <input type="password" placeholder="Confirm Password" id="confirm-password" class="regConfirmPassword" name="confirmPassword">
+    <input type="password" placeholder="Confirm Password" id="confirm-password" class="regConfirmPassword"
+      name="confirmPassword">
 
     <button type="submit">Register</button>
     <div class="social">
       <p>Do you have an account? <a href="/public/login.html">Login here</a></p>
     </div>
   </form>
-
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script>
-    const form = document.querySelector('#form');
-    const regFullName = document.querySelector('#fullname');
-    const regUserName = document.querySelector('#username');
-    const regPassword = document.querySelector('#password');
-    const regConfirmPassword = document.querySelector('#confirm-password');
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const fullname = regFullName.value;
-      const username = regUserName.value;
-      const password = regPassword.value;
-      const confirmPassword = regConfirmPassword.value;
-
-      try {
-        const response = await axios.post('/register', {
-          fullname,
-          username,
-          password,
-          confirmPassword
-        });
-
-        console.log(response.data);
-        // Boshqa amallarni bajaring
-      } catch (error) {
-        console.error(error);
-      }
-    });
-  </script>
+  <script type="text/javascript" src="/public/js/reg.js"></script>
 </body>
 </html>

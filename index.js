@@ -34,6 +34,10 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
+  confirmPassword: {
+    type: String,
+    required: true
+  },
   password: {
     type: String,
     required: true
@@ -51,13 +55,10 @@ app.get('/register', (req, res) => {
 app.post('/register', (req, res) => {
   const { fullname, username, password, confirmPassword } = req.body;
 
-  if (password !== confirmPassword) {
-    return res.status(400).send("Parollar mos kelmadi");
-  }
-
   const user = new User({
     fullname,
     username,
+    confirmPassword,
     password
   });
 
