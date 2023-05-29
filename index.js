@@ -80,7 +80,7 @@ app.post('/login', (req, res) => {
         res.status(200).send('Kirish bajarildi!');
       } 
       else {
-        res.status(400).send('Email yoki parol xato,yoki umuman bu user yo`q');
+        res.status(400).send('Email yoki parol xato,yoki umuman bu user yo`q❌');
       }
     })
     .catch((error) => {
