@@ -49,7 +49,7 @@ const User = mongoose.model('User', userSchema);
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'register.html'));
 });
 
 app.post('/register', (req, res) => {
